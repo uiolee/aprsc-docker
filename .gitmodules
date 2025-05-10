@@ -1,0 +1,3 @@
+[submodule "aprsc"]
+	path = aprsc
+	url = git@github.com:hessu/aprsc.git
