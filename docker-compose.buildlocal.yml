@@ -1,0 +1,19 @@
+services:
+  aprsc-local:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: aprsc-dc-local
+    ports:
+      - "8080:8080/tcp"
+      - "10152:10152/tcp"
+      - "14501:14501/tcp"
+      - "14580:14580/tcp"
+      - "8080:8080/udp"
+      - "10152:10152/udp"
+      - "14580:14580/udp"
+    volumes:
+      - ./_data/data:/opt/aprsc/data/
+      - ./_data/etc:/opt/aprsc/etc/
+      - ./_data/logs:/opt/aprsc/logs/
+
