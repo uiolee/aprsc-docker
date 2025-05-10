@@ -1,0 +1,6 @@
+*.pid
+*.log
+*.logs
+
+_data/data/**
+!_data/data/.gitkeep
