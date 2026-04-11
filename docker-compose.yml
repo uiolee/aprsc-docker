@@ -1,7 +1,7 @@
 services:
   aprsc:
-    image: uiolee/aprsc:latest
-    container_name: aprsc-dc
+    image: ghcr.io/uiolee/aprsc:latest
+    # image: docker.io/uiolee/aprsc:latest
     ports:
       - "8080:8080/tcp"
       - "10152:10152/tcp"

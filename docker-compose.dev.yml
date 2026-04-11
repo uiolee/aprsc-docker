@@ -1,9 +1,8 @@
 services:
-  aprsc-local:
+  aprsc-dev:
     build:
       context: .
       dockerfile: ./Dockerfile
-    container_name: aprsc-dc-local
     ports:
       - "8080:8080/tcp"
       - "10152:10152/tcp"

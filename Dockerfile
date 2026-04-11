@@ -54,7 +54,7 @@ EXPOSE 10152/udp
 EXPOSE 14580/udp
 
 LABEL org.opencontainers.image.authors="uiolee"
-LABEL org.opencontainers.image.description="Run the built aprsc binary in docker."
+LABEL org.opencontainers.image.description="Docker Images of aprsc"
 LABEL org.opencontainers.image.licenses="MPL-2.0"
 LABEL org.opencontainers.image.source="https://github.com/uiolee/aprsc-docker"
 LABEL org.opencontainers.image.title="aprsc"
