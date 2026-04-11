@@ -46,7 +46,7 @@ jobs:
       environment_url: https://github.com/uiolee/aprsc-docker/pkgs/container/aprsc
       registry: ghcr.io
       image_name: "${{ github.repository_owner }}/aprsc"
-      target_platforms: "linux/amd64"
+      target_platforms: "linux/amd64,linux/arm64"
     secrets: inherit
 
   publish-dch:
