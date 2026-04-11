@@ -65,6 +65,6 @@ jobs:
       environment_url: https://hub.docker.com/r/uiolee/aprsc
       registry: docker.io
       image_name: "${{ github.repository_owner }}/aprsc"
-      target_platforms: "linux/amd64"
+      target_platforms: "linux/amd64,linux/arm64"
     secrets:
       registry_password: ${{ secrets.DOCKERHUB_TOKEN }}
