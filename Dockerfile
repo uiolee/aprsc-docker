@@ -17,9 +17,7 @@ COPY ./aprsc ./aprsc
 WORKDIR /tmp/build/aprsc
 RUN git checkout -f $APRSC_GITREF
 
-RUN adduser -D -u 1000 aprsc && \
-  mkdir -p /opt/aprsc && \
-  chown -R aprsc:aprsc /opt/aprsc/
+RUN adduser -D -u 1000 -h /opt/aprsc aprsc
 
 WORKDIR /tmp/build/aprsc/src/
 RUN ./configure --prefix=/opt/aprsc LDFLAGS="-static" CFLAGS="-O2"
@@ -27,9 +25,13 @@ RUN make
 RUN make install
 
 WORKDIR /opt/aprsc/
-RUN file /opt/aprsc/sbin/aprsc && \
-  ldd /opt/aprsc/sbin/aprsc || echo "No dynamic dependencies"
-RUN tree -apugD -L 2 /opt/aprsc/
+RUN file ./sbin/aprsc && \
+  ldd ./sbin/aprsc && \
+  readelf -h ./sbin/aprsc && \
+  readelf -d ./sbin/aprsc && \
+  scanelf -n ./sbin/aprsc 
+
+RUN tree /opt/aprsc/
 
 RUN chown -R aprsc:aprsc /opt/aprsc/
 
@@ -45,7 +47,6 @@ COPY --from=builder /opt/aprsc /opt/aprsc
 WORKDIR /opt/aprsc
 ENTRYPOINT ["/opt/aprsc/sbin/aprsc"]
 
-# CMD ["-u","aprsc","-t","/opt/aprsc","-e", "info", "-o", "file", "-r", "logs", "-c", "etc/aprsc.conf"]
 CMD ["-t","/opt/aprsc","-u","aprsc","-c", "etc/aprsc.conf","-e", "info", "-o", "stderr"]
 # DONT add `-f` to the command.
 
