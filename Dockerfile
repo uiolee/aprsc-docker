@@ -2,7 +2,7 @@ ARG APRSC_GITREF="main"
 
 FROM alpine:latest AS build-base
 
-RUN apk add --no-cache build-base libevent-dev libevent-static perl \
+RUN apk add --no-cache build-base libevent-dev libevent-static perl zlib-dev zlib-static lksctp-tools-dev lksctp-tools-static \
   git
 
 # ===================================================================
