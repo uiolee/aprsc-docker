@@ -1,19 +1,27 @@
+ARG APRSC_GITREF="main"
+
 FROM alpine:latest AS build-base
 
-RUN apk add --no-cache build-base libevent-dev libevent-static perl
+RUN apk add --no-cache build-base libevent-dev libevent-static perl \
+  git
 
 # ===================================================================
 
 FROM build-base AS builder
+ARG APRSC_GITREF
 
-WORKDIR /tmp/
-COPY ./aprsc/ /tmp/aprsc-source/
+WORKDIR /tmp/build/
+COPY ./.git ./.git
+COPY ./aprsc ./aprsc
+
+WORKDIR /tmp/build/aprsc
+RUN git checkout -f $APRSC_GITREF
 
 RUN adduser -D -u 1000 aprsc && \
   mkdir -p /opt/aprsc && \
   chown -R aprsc:aprsc /opt/aprsc/
 
-WORKDIR /tmp/aprsc-source/src/
+WORKDIR /tmp/build/aprsc/src/
 RUN ./configure --prefix=/opt/aprsc LDFLAGS="-static" CFLAGS="-O2"
 RUN make
 RUN make install
@@ -28,6 +36,7 @@ RUN chown -R aprsc:aprsc /opt/aprsc/
 # ===================================================================
 
 FROM scratch
+ARG APRSC_GITREF
 
 COPY --from=builder /etc/passwd /etc/passwd
 COPY --from=builder /etc/group /etc/group
@@ -60,3 +69,4 @@ LABEL org.opencontainers.image.source="https://github.com/uiolee/aprsc-docker"
 LABEL org.opencontainers.image.title="aprsc"
 LABEL org.opencontainers.image.url="https://github.com/uiolee/aprsc-docker"
 LABEL org.opencontainers.image.version="0.2.3"
+LABEL aprsc.gitref="$APRSC_GITREF"
