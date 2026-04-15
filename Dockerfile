@@ -10,14 +10,9 @@ RUN apk add --no-cache build-base libevent-dev libevent-static perl zlib-dev zli
 FROM build-base AS builder
 ARG APRSC_GITREF
 
-WORKDIR /tmp/build/
-COPY ./.git ./.git
-COPY ./aprsc ./aprsc
-
-WORKDIR /tmp/build/aprsc
-RUN git checkout -f $APRSC_GITREF
-
 RUN adduser -D -u 1000 -h /opt/aprsc aprsc
+
+ADD https://github.com/hessu/aprsc.git#$APRSC_GITREF /tmp/build/aprsc
 
 WORKDIR /tmp/build/aprsc/src/
 RUN ./configure --prefix=/opt/aprsc LDFLAGS="-static" CFLAGS="-O2"
