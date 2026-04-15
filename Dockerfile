@@ -33,6 +33,8 @@ RUN file ./sbin/aprsc && \
 
 RUN tree /opt/aprsc/
 
+COPY ./_data/etc/aprsc.conf /opt/aprsc/etc/aprsc.conf
+
 RUN chown -R aprsc:aprsc /opt/aprsc/
 
 # ===================================================================
