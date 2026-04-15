@@ -60,5 +60,5 @@ LABEL org.opencontainers.image.authors="uiolee" \
   org.opencontainers.image.source="https://github.com/uiolee/aprsc-docker" \
   org.opencontainers.image.title="aprsc" \
   org.opencontainers.image.url="https://github.com/uiolee/aprsc-docker" \
-  org.opencontainers.image.version="0.2.3" \
+  org.opencontainers.image.version="0.3.0" \
   aprsc.gitref="$APRSC_GITREF"
