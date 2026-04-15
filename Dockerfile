@@ -52,24 +52,16 @@ ENTRYPOINT ["/opt/aprsc/sbin/aprsc"]
 CMD ["-t","/opt/aprsc","-u","aprsc","-c", "etc/aprsc.conf","-e", "info", "-o", "stderr"]
 # DONT add `-f` to the command.
 
-VOLUME ["/opt/aprsc/data/"]
-VOLUME ["/opt/aprsc/etc/"]
-VOLUME ["/opt/aprsc/logs/"]
+VOLUME ["/opt/aprsc/data/","/opt/aprsc/etc/","/opt/aprsc/logs/"]
 
-EXPOSE 8080/tcp
-EXPOSE 10152/tcp
-EXPOSE 14501/tcp
-EXPOSE 14580/tcp
+EXPOSE 8080/tcp 10152/tcp 14501/tcp 14580/tcp \
+  8080/udp 10152/udp 14580/udp
 
-EXPOSE 8080/udp
-EXPOSE 10152/udp
-EXPOSE 14580/udp
-
-LABEL org.opencontainers.image.authors="uiolee"
-LABEL org.opencontainers.image.description="Docker Images of aprsc"
-LABEL org.opencontainers.image.licenses="MPL-2.0"
-LABEL org.opencontainers.image.source="https://github.com/uiolee/aprsc-docker"
-LABEL org.opencontainers.image.title="aprsc"
-LABEL org.opencontainers.image.url="https://github.com/uiolee/aprsc-docker"
-LABEL org.opencontainers.image.version="0.2.3"
-LABEL aprsc.gitref="$APRSC_GITREF"
+LABEL org.opencontainers.image.authors="uiolee" \
+  org.opencontainers.image.description="Docker Images of aprsc" \
+  org.opencontainers.image.licenses="MPL-2.0" \
+  org.opencontainers.image.source="https://github.com/uiolee/aprsc-docker" \
+  org.opencontainers.image.title="aprsc" \
+  org.opencontainers.image.url="https://github.com/uiolee/aprsc-docker" \
+  org.opencontainers.image.version="0.2.3" \
+  aprsc.gitref="$APRSC_GITREF"
