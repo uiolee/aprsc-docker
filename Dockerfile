@@ -36,6 +36,8 @@ RUN tree /opt/aprsc/
 COPY ./_data/etc/aprsc.conf /opt/aprsc/etc/aprsc.conf
 
 RUN chown -R aprsc:aprsc /opt/aprsc/
+RUN /opt/aprsc/sbin/aprsc -h || echo "smoke!"
+RUN /opt/aprsc/sbin/aprsc -t /opt/aprsc -u aprsc -c etc/aprsc.conf -e debug -o stderr -y
 
 # ===================================================================
 
